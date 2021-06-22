@@ -1,0 +1,40 @@
+trigger:
+- azure-pipelines2
+
+pool:
+  vmImage: windows-latest
+
+stages:
+  - stage: build
+    displayName: Build
+    
+    jobs:
+      - job: build
+        steps: 
+          
+
+          - task: DotNetCoreCLI@2
+            inputs:
+              command: 'build'
+              projects: 'WebApplication5/Webapplication5.csproj'
+          - task: DotNetCoreCLI@2
+            inputs:
+              command: 'publish'
+              publishWebProjects: true
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              ArtifactName: 'drop'
+          
+          
+          
+  - stage: Development
+    jobs: 
+      - deployment: DeployWebApp
+        
+        environment: Development
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - script: echo deployed to dev
