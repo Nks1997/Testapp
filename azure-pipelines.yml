@@ -16,7 +16,7 @@ stages:
           - task: DotNetCoreCLI@2
             inputs:
               command: 'build'
-              projects: 'WebApplication5/Webapplication5.csproj'
+              projects: 'src/TechFabricSln/TechFabricSln.csproj'
           - task: DotNetCoreCLI@2
             inputs:
               command: 'publish'
