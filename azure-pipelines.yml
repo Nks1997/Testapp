@@ -17,6 +17,11 @@ stages:
             inputs:
               command: 'build'
               projects: 'src/TechFabricSln/TechFabricSln.csproj'
+          
+          - task: DotNetCoreCLI@2
+            inputs:
+              command: 'test'
+              projects: '**/*Test/*.csproj'
           - task: DotNetCoreCLI@2
             inputs:
               command: 'publish'
